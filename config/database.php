@@ -85,7 +85,7 @@ return [
             'port' => env('DB_PORT', '15505'),
             'database' => env('DB_DATABASE', 'db_engsof'),
             'username' => env('DB_USERNAME', 'userManut'),
-            'password' => env('DB_PASSWORD', 'Ehh2021'),
+            'password' => env('DB_PASSWORD', 'Ehh072021'),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,

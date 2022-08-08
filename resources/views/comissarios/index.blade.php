@@ -18,6 +18,7 @@
                                         <th>Cidade/UF</th> 
                                         <th>Telefone</th> 
                                         <th>E-mail</th> 
+                                        <th>Eventos</th> 
                                         <th>Ações</th> 
                                     </tr>
                                 </thead>
@@ -29,6 +30,13 @@
                                             <td>{{ $item->cidade_uf }}</td>
                                             <td>{{ $item->telefone }}</td>
                                             <td>{{ $item->email }}</td>
+                                            <td>
+                                                @forelse ($item->eventos as $evento)
+                                                    <span class="badge badge-primary my-1">{{ $evento->evento->nome }}</span>
+                                                @empty
+                                                    <span class="badge badge-secondary my-1">Sem Vinculo</span>
+                                                @endforelse
+                                            </td>
                                             <td>
                                                 <a class="btn btn-sm btn-primary" href="{{ route('editar-comissario', [$item->id_comissario])}}">Editar</a>
                                             </td>

@@ -9,4 +9,9 @@ class Comissario extends Model
 {
     protected $primaryKey = 'id_comissario';
     protected $table = 'comissarios';
+
+    public function eventos()
+    {
+        return $this->hasMany(ComissariosEventos::class, 'id_comissario', 'id_comissario')->with('evento');
+    }
 }

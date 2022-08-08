@@ -43,6 +43,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/ativar-evento/{id}', [EventosController::class, 'ativaEvento'])->name('ativar-evento');
     Route::get('/editar-evento/{id}', [EventosController::class, 'edit'])->name('editar-evento');
     Route::post('/alterar-evento/{id}', [EventosController::class, 'update'])->name('alterar-evento');
+
+    Route::get('/eventos/comissarios/listar/{id}', [EventosController::class, 'indexComissarios'])->name('listar-comissarios-evento');
+    Route::get('/eventos/comissarios/vincular/{id}', [EventosController::class, 'vincularComissarios'])->name('vincular-comissarios-evento');
+    Route::post('/eventos/comissarios/salvar-vinculo/{id}', [EventosController::class, 'salvarVinculoComissarios'])->name('salvar-vinculo-comissarios-evento');
     
     # Comissários
     Route::get('/comissarios', [ComissariosController::class, 'index'])->name('comissarios');

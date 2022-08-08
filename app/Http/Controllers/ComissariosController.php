@@ -16,8 +16,7 @@ class ComissariosController extends Controller
      */
     public function index()
     {
-        $comissarios = Comissario::all();
-
+        $comissarios = Comissario::with('eventos')->get();
         return view('comissarios.index', compact('comissarios'));
     }
 

@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="EDuardo Henrique Haddad">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -11,6 +12,9 @@
 
     <!-- Scripts -->
     <script src="{{ asset('assets/js/app.js') }}" defer></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.12.1/af-2.4.0/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/cr-1.5.6/date-1.1.2/fc-4.1.0/fh-3.2.4/kt-2.7.0/r-2.3.0/rg-1.2.0/rr-1.2.8/sc-2.0.7/sb-1.3.4/sp-2.0.2/sl-1.4.0/sr-1.1.1/datatables.min.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -55,30 +59,11 @@
                                 </li>
                             @endif --}}
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-                                
-
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('eventos') }}">Eventos</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('comissarios') }}">Comissarios</a>
-                                </li>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('home') }}"><i class='icon icon-home text-primary'></i> Início</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('eventos') }}"><i class='icon icon-list-alt text-primary'></i> Eventos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('comissarios') }}"><i class='icon icon-users text-primary'></i> Comissários</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('eventos') }}"><i class='icon icon-inbox-document-text2 text-primary'></i> Relatórios</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}"><i class='icon icon-power-off text-red'></i> Sair</a></li>
                         @endguest
                     </ul>
                 </div>
@@ -89,5 +74,9 @@
             @yield('content')
         </main>
     </div>
+
+    <script>
+        $.datetimepicker.setLocale('pt');
+    </script>
 </body>
 </html>

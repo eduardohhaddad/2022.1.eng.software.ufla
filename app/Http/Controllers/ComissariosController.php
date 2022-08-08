@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comissario;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ComissariosController extends Controller
 {
@@ -26,7 +28,7 @@ class ComissariosController extends Controller
      */
     public function create()
     {
-        //
+        return view('comissarios.cadastrar');
     }
 
     /**
@@ -37,7 +39,23 @@ class ComissariosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            DB::transaction(function() use ($request) {
+                $novo_comissario = new Comissario();
+                $novo_comissario->nome = $request->input('nome');
+                $novo_comissario->cpf = $request->input('cpf');
+                $novo_comissario->telefone = $request->input('telefone');
+                $novo_comissario->email = $request->input('email');
+                $novo_comissario->cidade_uf = $request->input('cidade_uf');
+
+                $novo_comissario->save();
+            });
+        }
+        catch(Exception $e){
+            dd($e);
+        }
+
+        return redirect(route('comissarios'));
     }
 
     /**
@@ -59,7 +77,8 @@ class ComissariosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $comissario = Comissario::find($id);
+        return view('comissarios.editar', compact('comissario'));
     }
 
     /**
@@ -71,7 +90,23 @@ class ComissariosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try{
+            DB::transaction(function() use ($request, $id) {
+                $novo_comissario = Comissario::find($id);
+                $novo_comissario->nome = $request->input('nome');
+                $novo_comissario->cpf = $request->input('cpf');
+                $novo_comissario->telefone = $request->input('telefone');
+                $novo_comissario->email = $request->input('email');
+                $novo_comissario->cidade_uf = $request->input('cidade_uf');
+
+                $novo_comissario->save();
+            });
+        }
+        catch(Exception $e){
+            dd($e);
+        }
+
+        return redirect(route('comissarios'));
     }
 
     /**

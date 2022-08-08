@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Eventos <a href="{{ route('cadastro-evento') }}" class="btn btn-success">Cadastrar</a></div>
+                <div class="card-header">Eventos <a href="{{ route('cadastro-evento') }}" class="btn btn-success"><i class='icon icon-plus text-white'></i>Cadastrar</a></div>
 
                 <div class="card-body">
                     @if( count($eventos) > 0 )
@@ -26,14 +26,14 @@
                                     @foreach ($eventos as $item)
                                         <tr>
                                             <td>{{ $item->nome }}</td>
-                                            <td>{{ $item->data_referencia }}</td>
-                                            <td>{{ $item->meta_venda_ingressos_comissao }}</td>
-                                            <td>{{ $item->comissao_por_ingresso }}</td>
+                                            <td>{{ Helpers::ParaDateTimebr($item->data_referencia) }}</td>
+                                            <td>{{ Helpers::ParaDecimal($item->meta_venda_ingressos_comissao) }}</td>
+                                            <td>{{ Helpers::ParaDecimal($item->comissao_por_ingresso) }}</td>
                                             <td>{{ $item->local }}</td>
-                                            <td>{{ $item->ativo }}</td>
+                                            <td>@if( $item->ativo ) <i class='icon icon-check text-green'></i> @else <i class='icon icon-close text-red'></i> @endif</td>
                                             <td>
-                                                <a class="text-red" href="{{ route('ativar-evento', [$item->id_evento])}}">Alt. Situacao</a>
-                                                <a class="text-red" href="{{ route('deletar-evento', [$item->id_evento])}}">Deletar</a>
+                                                <a class="btn btn-sm btn-dark" href="{{ route('ativar-evento', [$item->id_evento])}}">Alt. Situacao</a>
+                                                <a class="btn btn-sm btn-danger" href="{{ route('deletar-evento', [$item->id_evento])}}">Deletar</a>
                                             </td>
                                         </tr>
                                     @endforeach

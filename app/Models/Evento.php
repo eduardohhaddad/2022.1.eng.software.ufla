@@ -14,9 +14,8 @@ class Evento extends Model
         'ativo',
     ];
 
-
     public function comissarios()
     {
-        //return $this->hasMany(ComissionarioEnderecos::class, 'id_comissionario', 'id_comissionario')->with('cidade');
+        return $this->hasMany(ComissariosEventos::class, 'id_evento', 'id_evento')->with('comissario');
     }
 }

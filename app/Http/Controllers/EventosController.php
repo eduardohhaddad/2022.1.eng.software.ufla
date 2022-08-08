@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comissario;
+use App\Models\ComissariosEventos;
 use App\Models\Evento;
 use Exception;
 use Illuminate\Console\Scheduling\Event;
@@ -17,7 +19,7 @@ class EventosController extends Controller
      */
     public function index()
     {
-        $eventos = Evento::all();
+        $eventos = Evento::with('comissarios')->get();
 
         return view('eventos.index', compact('eventos'));
     }
@@ -144,6 +146,52 @@ class EventosController extends Controller
         catch(Exception $e){
             dd($e);
         }
+        return redirect(route('eventos'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexComissarios($id)
+    {
+        $evento = Evento::where('id_evento', $id)->with('comissarios')->first();
+        //dd($evento);
+        return view('eventos.comissarios-listar', compact('evento'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function vincularComissarios($id)
+    {
+        $evento = Evento::where('id_evento', $id)->with('comissarios')->first();
+        $comissarios = Comissario::all();
+        return view('eventos.comissarios-cadastrar', compact('evento', 'comissarios'));
+    }
+
+
+    public function salvarVinculoComissarios(Request $request, $id)
+    {
+
+        try{
+            DB::transaction(function() use ($request, $id) {
+                
+                foreach($request->input('comissarios') as $id_comissario) {
+                    $novo = new ComissariosEventos();
+                    $novo->id_evento = $id;
+                    $novo->id_comissario = $id_comissario;
+                    $novo->save();
+                }
+            });
+        }
+        catch(Exception $e){
+            dd($e);
+        }
+
         return redirect(route('eventos'));
     }
 }

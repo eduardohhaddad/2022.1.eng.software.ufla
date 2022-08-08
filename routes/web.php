@@ -3,6 +3,7 @@
 use App\Http\Controllers\ComissariosController;
 use App\Http\Controllers\EventosController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RelatoriosController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
@@ -62,5 +63,15 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/comissarios/eventos/ingressos/salvar-recebidos/{id}', [ComissariosController::class, 'salvarIngressosRecebidos'])->name('salvar-ingressos-recebidos');
     Route::post('/comissarios/eventos/ingressos/salvar-vendidos/{id}', [ComissariosController::class, 'salvarIngressosVendidos'])->name('salvar-ingressos-vendidos');
+
+    #Relatórios
+    Route::get('/relatorios', [RelatoriosController::class, 'index'])->name('relatorios');
+    Route::get('/cadastro-relatorios', [RelatoriosController::class, 'create'])->name('cadastro-relatorio');
+    Route::post('/cadastrar-relatorio', [RelatoriosController::class, 'store'])->name('cadastrar-relatorio');
+    Route::get('/relatorio/alterar-situaca/{id}', [RelatoriosController::class, 'alteraSituacao'])->name('alterar-situaca-relatorio');
+    Route::get('/relatorio/editar/{id}', [RelatoriosController::class, 'edit'])->name('editar-relatorio');
+
+    # Relatórios Criados
+    Route::get('/relatorio/eventos-periodo', [RelatoriosController::class, 'eventosPorPeriodo'])->name('relatorio-eventos-periodo');
 
 });

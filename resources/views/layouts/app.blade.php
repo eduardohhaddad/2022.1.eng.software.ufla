@@ -62,7 +62,7 @@
                             <li class="nav-item"><a class="nav-link" href="{{ route('home') }}"><i class='icon icon-home text-primary'></i> Início</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('eventos') }}"><i class='icon icon-list-alt text-primary'></i> Eventos</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('comissarios') }}"><i class='icon icon-users text-primary'></i> Comissários</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ route('eventos') }}"><i class='icon icon-inbox-document-text2 text-primary'></i> Relatórios</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('relatorios') }}"><i class='icon icon-inbox-document-text2 text-primary'></i> Relatórios</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}"><i class='icon icon-power-off text-red'></i> Sair</a></li>
                         @endguest
                     </ul>

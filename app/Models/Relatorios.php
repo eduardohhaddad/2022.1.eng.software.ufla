@@ -9,4 +9,8 @@ class Relatorios extends Model
 {
     protected $primaryKey = 'id';
     protected $table = 'relatorios';
+
+    protected $fillable = [
+        'ativo',
+    ];
 }

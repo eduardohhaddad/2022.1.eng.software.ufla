@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="nome" class="col-md-4 col-form-label text-md-end">Recebidos *</label>
+                            <label for="nome" class="col-md-4 col-form-label text-md-end">Vendidos *</label>
 
                             <div class="col-md-6">
                                 <input id="ingressos_vendidos" type="number" step="1" min="0" max="{{ $total_recebidos }}" class="form-control @error('ingressos_vendidos') is-invalid @enderror" name="ingressos_vendidos" value="{{ $total_vendidos }}" 

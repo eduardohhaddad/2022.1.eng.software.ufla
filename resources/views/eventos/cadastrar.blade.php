@@ -40,10 +40,10 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="meta_venda_ingressos_comissao" class="col-md-4 col-form-label text-md-end">% Meta Venda Ingressos *</label>
+                            <label for="meta_venda_ingressos_comissao" class="col-md-4 col-form-label text-md-end">Meta Venda Ingressos *</label>
 
                             <div class="col-md-6">
-                                <input id="meta_venda_ingressos_comissao" type="number" step="0.1" class="form-control @error('meta_venda_ingressos_comissao') is-invalid @enderror" name="meta_venda_ingressos_comissao" value="{{ old('meta_venda_ingressos_comissao') }}" autocomplete="off" required>
+                                <input id="meta_venda_ingressos_comissao" type="number" step="1" class="form-control @error('meta_venda_ingressos_comissao') is-invalid @enderror" name="meta_venda_ingressos_comissao" value="{{ old('meta_venda_ingressos_comissao') }}" autocomplete="off" required>
 
                                 @error('meta_venda_ingressos_comissao')
                                     <span class="invalid-feedback" role="alert">

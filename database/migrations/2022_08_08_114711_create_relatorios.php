@@ -18,6 +18,7 @@ class CreateRelatorios extends Migration
             $table->string('rota');
             $table->string('nome');
             $table->text('descricao');
+            $table->boolean('ativo')->default(true);
             $table->timestamps();
         });
     }

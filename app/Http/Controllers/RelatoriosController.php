@@ -13,7 +13,7 @@ class RelatoriosController extends Controller
      */
     public function index()
     {
-        $relatorios = array();
+        
     }
 
     /**

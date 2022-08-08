@@ -6,6 +6,7 @@ use App\Models\Evento;
 use App\Models\Relatorios;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class RelatoriosController extends Controller
@@ -28,7 +29,10 @@ class RelatoriosController extends Controller
      */
     public function create()
     {
-        return view('relatorios.cadastrar');
+        if(Auth::user()->nivel === 'admin')
+            return view('relatorios.cadastrar');
+        else
+            return redirect(route('relatorios'));
     }
 
     /**
@@ -39,20 +43,25 @@ class RelatoriosController extends Controller
      */
     public function store(Request $request)
     {
-        try{
-            DB::transaction(function() use ($request) {
-                $relatorio = new Relatorios();
-                $relatorio->nome = $request->input('nome');
-                $relatorio->descricao = $request->input('descricao');
-                $relatorio->rota = $request->input('rota');
-                $relatorio->save();
-            });
+        if(Auth::user()->nivel === 'admin'){
+            try{
+                DB::transaction(function() use ($request) {
+                    $relatorio = new Relatorios();
+                    $relatorio->nome = $request->input('nome');
+                    $relatorio->descricao = $request->input('descricao');
+                    $relatorio->rota = $request->input('rota');
+                    $relatorio->save();
+                });
+            }
+            catch(Exception $e){
+                dd($e);
+            }
+    
+            return redirect(route('relatorios'));
         }
-        catch(Exception $e){
-            dd($e);
-        }
-
-        return redirect(route('relatorios'));
+            
+        else
+            return redirect(route('relatorios'));
     }
 
     /**
@@ -102,17 +111,22 @@ class RelatoriosController extends Controller
 
     public function alteraSituacao($id)
     {
-        try{
-            $evento = Relatorios::find($id);
+        if(Auth::user()->nivel === 'admin'){
+            try{
+                $evento = Relatorios::find($id);
+                
+                DB::transaction(function() use ($id,$evento) {
+                    Relatorios::find($id)->update(['ativo' => !$evento->ativo]);
+                });
+            }
+            catch(Exception $e){
+                dd($e);
+            }
+            return redirect(route('eventos'));
+        }
             
-            DB::transaction(function() use ($id,$evento) {
-                Relatorios::find($id)->update(['ativo' => !$evento->ativo]);
-            });
-        }
-        catch(Exception $e){
-            dd($e);
-        }
-        return redirect(route('eventos'));
+        else
+            return redirect(route('relatorios'));
     }
 
 

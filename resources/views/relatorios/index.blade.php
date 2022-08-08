@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">Relatórios 
-                    <a href="{{ route('cadastro-relatorio') }}" class="btn btn-success"><i class='icon icon-plus text-white'></i>Cadastrar</a>
+                    @if(Auth::user()->nivel === 'admin')<a href="{{ route('cadastro-relatorio') }}" class="btn btn-success"><i class='icon icon-plus text-white'></i>Cadastrar</a>@endif
                 </div>
 
                 <div class="card-body">
@@ -28,8 +28,10 @@
                                             <td>@if( $item->ativo ) <i class='icon icon-check text-green'></i> @else <i class='icon icon-close text-red'></i> @endif</td>
                                             <td>{{ $item->descricao }}</td>
                                             <td>
-                                                <a class="btn btn-sm btn-dark" href="{{ route('alterar-situaca-relatorio', [$item->id])}}">Alt. Situação</a>
-                                                <a class="btn btn-sm btn-primary" href="{{ route('editar-relatorio', [$item->id])}}">Editar</a>
+                                                @if(Auth::user()->nivel === 'admin')
+                                                    <a class="btn btn-sm btn-dark" href="{{ route('alterar-situaca-relatorio', [$item->id])}}">Alt. Situação</a>
+                                                    <a class="btn btn-sm btn-primary" href="{{ route('editar-relatorio', [$item->id])}}">Editar</a>
+                                                @endif
                                                 <a class="btn btn-sm btn-warning text-dark" href="{{ route($item->rota, [$item->id])}}">Acessar</a>
                                             </td>
                                         </tr>

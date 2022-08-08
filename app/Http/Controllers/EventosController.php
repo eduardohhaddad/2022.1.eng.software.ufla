@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comissario;
 use App\Models\ComissariosEventos;
+use App\Models\ComissariosIngressos;
 use App\Models\Evento;
 use Exception;
 use Illuminate\Console\Scheduling\Event;
@@ -157,7 +158,21 @@ class EventosController extends Controller
     public function indexComissarios($id)
     {
         $evento = Evento::where('id_evento', $id)->with('comissarios')->first();
-        //dd($evento);
+
+        foreach ($evento->comissarios as $lopp => $item) {
+
+            $ingressos = 
+                ComissariosIngressos::
+                    select('*')
+                    ->leftJoin('comissarios_eventos', 'comissarios_eventos.id_relacao_comissario_evento', 'comissarios_ingressos.id_relacao_comissario_evento')
+                    ->where('comissarios_eventos.id_evento', $id)
+                    ->where('comissarios_eventos.id_comissario', $item->id_comissario)
+                    ->first();
+                    
+            $evento->comissarios[$lopp]->ingressos_recebidos = $ingressos->ingressos_recebidos ?? 0;
+            $evento->comissarios[$lopp]->ingressos_vendidos = $ingressos->ingressos_vendidos ?? 0;
+            $evento->comissarios[$lopp]->total = $ingressos->total ?? 0; 
+        }
         return view('eventos.comissarios-listar', compact('evento'));
     }
 

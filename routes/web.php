@@ -48,6 +48,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/eventos/comissarios/vincular/{id}', [EventosController::class, 'vincularComissarios'])->name('vincular-comissarios-evento');
     Route::post('/eventos/comissarios/salvar-vinculo/{id}', [EventosController::class, 'salvarVinculoComissarios'])->name('salvar-vinculo-comissarios-evento');
     
+    
     # Comissários
     Route::get('/comissarios', [ComissariosController::class, 'index'])->name('comissarios');
     Route::get('/cadastro-comissario', [ComissariosController::class, 'create'])->name('cadastro-comissario');
@@ -55,5 +56,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/editar-comissario/{id}', [ComissariosController::class, 'edit'])->name('editar-comissario');
     Route::post('/alterar-comissario/{id}', [ComissariosController::class, 'update'])->name('alterar-comissario');
     Route::get('/deletar-comissario/{id}', [ComissariosController::class, 'destroy'])->name('deletar-comissario');
+
+    Route::get('/comissarios/eventos/ingressos/recebidos/{id}', [ComissariosController::class, 'ingressosRecebidos'])->name('ingressos-recebidos');
+    Route::get('/comissarios/eventos/ingressos/vendidos/{id}', [ComissariosController::class, 'ingressosVendidos'])->name('ingressos-vendidos');
+
+    Route::post('/comissarios/eventos/ingressos/salvar-recebidos/{id}', [ComissariosController::class, 'salvarIngressosRecebidos'])->name('salvar-ingressos-recebidos');
+    Route::post('/comissarios/eventos/ingressos/salvar-vendidos/{id}', [ComissariosController::class, 'salvarIngressosVendidos'])->name('salvar-ingressos-vendidos');
 
 });

@@ -18,6 +18,8 @@
                                         <th>Cidade/UF</th>
                                         <th>Telefone</th>
                                         <th>E-mail</th>
+                                        <th>Ing. Rec.</th>
+                                        <th>Ing. Ven.</th>
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
@@ -29,8 +31,11 @@
                                             <td>{{ $item->comissario->cidade_uf }}</td>
                                             <td>{{ $item->comissario->telefone }}</td>
                                             <td>{{ $item->comissario->email }}</td>
+                                            <td>{{ $item->ingressos_recebidos }}</td>
+                                            <td>{{ $item->ingressos_vendidos }}</td>
                                             <td>
-                                                
+                                                <a class="btn btn-sm btn-primary" href="{{ route('ingressos-recebidos', [$item->id_relacao_comissario_evento])}}">Ing. Recebidos</a>
+                                                <a class="btn btn-sm btn-danger" href="{{ route('ingressos-vendidos', [$item->id_relacao_comissario_evento])}}">Ing. Vendidos</a>
                                             </td>
                                         </tr>
                                     @endforeach

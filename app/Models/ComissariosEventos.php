@@ -19,4 +19,5 @@ class ComissariosEventos extends Model
     {
         return $this->hasOne(Comissario::class, 'id_comissario', 'id_comissario');
     }
+
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comissario;
+use App\Models\ComissariosEventos;
+use App\Models\ComissariosIngressos;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -117,5 +119,59 @@ class ComissariosController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function ingressosRecebidos($id)
+    {
+        $ingressos = ComissariosIngressos::where('id_relacao_comissario_evento', $id)->first();
+        $total_recebidos = isset($ingressos->ingressos_recebidos) ? $ingressos->ingressos_recebidos : 0;
+        $total_vendidos = isset($ingressos->ingressos_recebidos) ? $ingressos->ingressos_vendidos : 0;
+        $recebido = true;
+        $vendido = false;
+        $rota = "salvar-ingressos-recebidos";
+        return view('comissarios.cadastrar-ingressos', compact('id', 'total_recebidos', 'total_vendidos', 'ingressos', 'recebido', 'vendido', 'rota'));
+    }
+
+    public function ingressosVendidos($id)
+    {
+        $ingressos = ComissariosIngressos::where('id_relacao_comissario_evento', $id)->first();
+        $total_recebidos = isset($ingressos->ingressos_recebidos) ? $ingressos->ingressos_recebidos : 0;
+        $total_vendidos = isset($ingressos->ingressos_recebidos) ? $ingressos->ingressos_vendidos : 0;
+        $recebido = false;
+        $vendido = true;
+        $rota = "salvar-ingressos-recebidos";
+        return view('comissarios.cadastrar-ingressos', compact('id', 'total_recebidos', 'total_vendidos', 'ingressos', 'recebido', 'vendido', 'rota'));
+    }
+
+    public function salvarIngressosRecebidos(Request $request, $id)
+    {
+        try{
+
+            $evento = ComissariosEventos::where('id_relacao_comissario_evento', $id)->first();
+
+            DB::transaction(function() use ($request, $id) {
+                
+                $ingressos = ComissariosIngressos::where('id_relacao_comissario_evento', $id)->first();
+                
+                if( is_null($ingressos))
+                    $ingressos = new ComissariosIngressos();
+
+                $ingressos->id_relacao_comissario_evento = $id;
+                $ingressos->ingressos_recebidos = $request->input('ingressos_recebidos');
+                $ingressos->ingressos_vendidos = $request->input('ingressos_vendidos');
+                $ingressos->total = 0;
+                $ingressos->save();
+            });
+        }
+        catch(Exception $e){
+            dd($e);
+        }
+
+        return redirect(route('listar-comissarios-evento', [$evento->id_evento]));
+    }
+
+    public function salvarIngressosVendidos(Request $request, $id)
+    {
+        dd($request, $id);
     }
 }

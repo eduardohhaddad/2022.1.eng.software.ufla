@@ -14,4 +14,9 @@ class Comissario extends Model
     {
         return $this->hasMany(ComissariosEventos::class, 'id_comissario', 'id_comissario')->with('evento');
     }
+
+    public function ingressos()
+    {
+        return $this->hasMany(ComissariosIngressos::class, 'id_comissario', 'id_comissario');
+    }
 }

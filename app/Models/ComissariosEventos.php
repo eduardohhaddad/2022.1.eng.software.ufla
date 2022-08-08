@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ComissariosEventos extends Model
 {
-    use HasFactory;
+    protected $primaryKey = 'id_relacao_comissario_evento';
+    protected $table = 'comissarios_eventos';
 }

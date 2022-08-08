@@ -4,6 +4,7 @@ use App\Http\Controllers\ComissariosController;
 use App\Http\Controllers\EventosController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +23,12 @@ Auth::routes();
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/logout', function () {
+    Auth::logout();
+    session()->flush();
+    return Redirect::to('login');
+})->middleware('auth');
 
 
 Route::middleware(['auth'])->group(function () {

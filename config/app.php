@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', '2022.1 - Eng. SOftware'),
+    'name' => env('APP_NAME', '2022.1 - Eng. Software'),
 
     /*
     |--------------------------------------------------------------------------
@@ -229,6 +229,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        'Helpers' => App\Helper\Helper::class,
 
     ],
 

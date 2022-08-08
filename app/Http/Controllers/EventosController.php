@@ -79,7 +79,8 @@ class EventosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $evento = Evento::find($id);
+        return view('eventos.editar', compact('evento'));
     }
 
     /**
@@ -91,7 +92,23 @@ class EventosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try{
+            DB::transaction(function() use ($request, $id) {
+                $evento = Evento::find($id);
+                $evento->nome = $request->input('nome');
+                $evento->data_referencia = $request->input('data_referencia');
+                $evento->meta_venda_ingressos_comissao = $request->input('meta_venda_ingressos_comissao');
+                $evento->comissao_por_ingresso = $request->input('comissao_por_ingresso');
+                $evento->local = $request->input('local');
+
+                $evento->save();
+            });
+        }
+        catch(Exception $e){
+            dd($e);
+        }
+
+        return redirect(route('eventos'));
     }
 
     /**

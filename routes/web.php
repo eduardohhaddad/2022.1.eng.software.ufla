@@ -41,6 +41,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/cadastrar-evento', [EventosController::class, 'store'])->name('cadastrar-evento');
     Route::get('/deletar-evento/{id}', [EventosController::class, 'destroy'])->name('deletar-evento');
     Route::get('/ativar-evento/{id}', [EventosController::class, 'ativaEvento'])->name('ativar-evento');
+    Route::get('/editar-evento/{id}', [EventosController::class, 'edit'])->name('editar-evento');
+    Route::post('/alterar-evento/{id}', [EventosController::class, 'update'])->name('alterar-evento');
     
     # Comissários
     Route::get('/comissarios', [ComissariosController::class, 'index'])->name('comissarios');

@@ -33,6 +33,7 @@
                                             <td>@if( $item->ativo ) <i class='icon icon-check text-green'></i> @else <i class='icon icon-close text-red'></i> @endif</td>
                                             <td>
                                                 <a class="btn btn-sm btn-dark" href="{{ route('ativar-evento', [$item->id_evento])}}">Alt. Situacao</a>
+                                                <a class="btn btn-sm btn-primary" href="{{ route('editar-evento', [$item->id_evento])}}">Editar</a>
                                                 <a class="btn btn-sm btn-danger" href="{{ route('deletar-evento', [$item->id_evento])}}">Deletar</a>
                                             </td>
                                         </tr>

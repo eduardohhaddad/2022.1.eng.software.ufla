@@ -18,7 +18,6 @@ class RelatoriosController extends Controller
     public function index()
     {
         $relatorios = Relatorios::all();
-
         return view('relatorios.index', compact('relatorios'));
     }
 
@@ -121,14 +120,15 @@ class RelatoriosController extends Controller
     #################################################################################################
     #################################################################################################
     #################################################################################################
-    public function eventosPorPeriodo()
+    public function eventosPorPeriodo($id_relatorio)
     {
+        $relatorio = Relatorios::find($id_relatorio);
         $data_inicial = date('Y-01-01 00:00:00');
         $data_final = date('Y-12-31 23:59:59');
 
-        $comissao = $this->dadosEventosPorPeriodo($data_inicial, $data_final, 'controlador');
+        $dados = $this->dadosEventosPorPeriodo($data_inicial, $data_final, 'controlador');
 
-        return 0;
+        return view('relatorios.eventos-por-periodo', compact('relatorio', 'data_inicial', 'data_final', 'dados'));
     }
 
     protected function dadosEventosPorPeriodo($data_inicial, $data_final, $tipo)

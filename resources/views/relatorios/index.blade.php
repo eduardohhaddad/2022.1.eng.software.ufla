@@ -16,7 +16,7 @@
                                 <thead>
                                     <tr>
                                         <th>Nome</th>
-                                        <th>Situacao</th>
+                                        <th>Situação</th>
                                         <th>Descrição</th>
                                         <th>Ações</th> 
                                     </tr>
@@ -30,7 +30,7 @@
                                             <td>
                                                 <a class="btn btn-sm btn-dark" href="{{ route('alterar-situaca-relatorio', [$item->id])}}">Alt. Situação</a>
                                                 <a class="btn btn-sm btn-primary" href="{{ route('editar-relatorio', [$item->id])}}">Editar</a>
-                                                <a class="btn btn-sm btn-warning text-dark" href="{{ route($item->rota)}}">Acessar</a>
+                                                <a class="btn btn-sm btn-warning text-dark" href="{{ route($item->rota, [$item->id])}}">Acessar</a>
                                             </td>
                                         </tr>
                                     @endforeach

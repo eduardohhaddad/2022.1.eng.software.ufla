@@ -72,6 +72,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/relatorio/editar/{id}', [RelatoriosController::class, 'edit'])->name('editar-relatorio');
 
     # Relatórios Criados
-    Route::get('/relatorio/eventos-periodo', [RelatoriosController::class, 'eventosPorPeriodo'])->name('relatorio-eventos-periodo');
+    Route::get('/relatorio/eventos-periodo/{id}', [RelatoriosController::class, 'eventosPorPeriodo'])->name('relatorio-eventos-periodo');
+    Route::get('/relatorio/eventos-periodo/{data_inicial?}/{data_final?}', [RelatoriosController::class, 'dadosEventosPorPeriodo'])->name('dados-eventos-por-periodo');
 
 });

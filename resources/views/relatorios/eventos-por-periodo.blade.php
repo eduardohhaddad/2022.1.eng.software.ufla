@@ -41,7 +41,7 @@
                                             <td>{{ $item->nome }}</td>
                                             <td>{{ $item->data_referencia }}</td>
                                             <td>{{ Helpers::ParaTime($item->data_referencia) }}</td>
-                                            <td>{{ Helpers::ParaInteiro($item->meta_venda_ingressos_comissao) }}%</td>
+                                            <td>{{ Helpers::ParaInteiro($item->meta_venda_ingressos_comissao) }}</td>
                                             <td>R$ {{ Helpers::ParaDinheiro($item->comissao_por_ingresso) }}</td>
                                             <td>{{ $item->local }}</td>
                                             <td>@if( $item->ativo ) <i class='icon icon-check text-green'></i> @else <i class='icon icon-close text-red'></i> @endif</td>

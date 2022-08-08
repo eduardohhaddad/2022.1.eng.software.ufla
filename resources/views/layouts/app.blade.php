@@ -11,7 +11,6 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('assets/js/app.js') }}" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
@@ -76,6 +75,11 @@
         </main>
     </div>
 
+    <!--/#js -->
+    <script src="{{ asset('assets/js/app.js') }}?v=1.0.01"></script>
+    <script>
+        $.datetimepicker.setLocale('pt');
+    </script>
     @yield('js')
 </body>
 </html>
